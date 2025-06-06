@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Age Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+    }
+
+    .container {
+      background-color: #8e44ad;
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .container h1 {
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      display: inline-flex;
+      align-items: center;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(211, 90, 90, 0.3);
+    }
+
+    .input-group input {
+      padding: 8px;
+      font-size: 16px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .input-group button {
+      padding: 8px 16px;
+      background: #831abc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .result {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .result-box {
+      background: white;
+      color: black;
+      margin: 0 10px;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      min-width: 80px;
+    }
+
+    .result-box span {
+      display: block;
+      font-size: 14px;
+      margin-top: 5px;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AGE CALCULATOR</h1>
+    <div class="input-group">
+      <input type="date" id="dob" />
+      <button onclick="calculateAge()">Calculator</button>
+    </div>
+    <div class="result">
+      <div class="result-box" id="years">00<span>YEAR</span></div>
+      <div class="result-box" id="months">00<span>MONTH</span></div>
+      <div class="result-box" id="days">00<span>DAY</span></div>
+    </div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const dob = new Date(document.getElementById("dob").value);
+      if (!dob.getTime()) return;
+
+      const today = new Date();
+      let years = today.getFullYear() - dob.getFullYear();
+      let months = today.getMonth() - dob.getMonth();
+      let days = today.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      document.getElementById("years").innerHTML = `${String(years).padStart(2, '0')}<span>YEAR</span>`;
+      document.getElementById("months").innerHTML = `${String(months).padStart(2, '0')}<span>MONTH</span>`;
+      document.getElementById("days").innerHTML = `${String(days).padStart(2, '0')}<span>DAY</span>`;
+    }
+  </script>
+</body>
+</html>

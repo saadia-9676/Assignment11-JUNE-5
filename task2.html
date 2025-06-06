@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prime Number Generator</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      display: flex;
+      justify-content: center;
+      padding: 50px;
+      background: #e4e2e2;
+    }
+    .container {
+      background: rgb(232, 174, 228);
+      padding: 30px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+    }
+    input[type="text"] {
+      width: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Prime Number Generator</h2>
+    <label>Start</label>
+    <input type="text" id="start"><br><br>
+    <label>End</label>
+    <input type="text" id="end"><br><br>
+    <label>Prime Number</label><br>
+    <textarea id="output" readonly></textarea><br><br>
+    <button onclick="generatePrimes()">Generate</button>
+  </div>
+
+  <script>
+    function isPrime(num) {
+      if (num < 2) return false;
+      for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) return false;
+      }
+      return true;
+    }
+
+    function generatePrimes() {
+      const start = parseInt(document.getElementById("start").value);
+      const end = parseInt(document.getElementById("end").value);
+      let primes = [];
+
+      for (let i = start; i <= end; i++) {
+        if (isPrime(i)) primes.push(i);
+      }
+
+      document.getElementById("output").value = primes.join(", ");
+    }
+  </script>
+</body>
+</html>
